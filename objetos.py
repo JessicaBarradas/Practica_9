@@ -15,14 +15,25 @@ nombreV=input("Escribe el nombre del villano: ")
 alturaV=float(input("Escribe la altura del villano: "))
 recargarV=int(input("Cuantas balas recarga el villano: "))
 
+#2. Crear objeto de clase personaje
+heroe=Personaje(especieH,nombreH,alturaH)
+villano=Personaje(especieV,nombreV,alturaV)
 
-#1. Crear objeto de clase personaje
-heroe= Personaje()
-#2. Usar atributos
+#3. Usar atributos
+print("")
+print("####### Objeto Heroe ####")
 print("El personaje se llama: " + heroe.nombre)
 print("Pertenece a la especie : " + heroe.especie)
-print("Tiene una altura de: " + heroe.altura)
-#3. Usar metodos
+print("Tiene una altura de: " + str(heroe.altura))
 heroe.correr(True)
 heroe.lanzarGranadas()
-heroe.recargarArma(87)
+heroe.recargarArma(recargarH)
+
+print("")
+print("####### Objeto Villano ####")
+print("El personaje se llama: " + villano.nombre)
+print("Pertenece a la especie : " + villano.especie)
+print("Tiene una altura de: " + str(villano.altura))
+villano.correr(True)
+villano.lanzarGranadas()
+villano.recargarArma(recargarV)
