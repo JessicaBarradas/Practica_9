@@ -2,9 +2,10 @@ class Personaje:
 
     #Definimos el constructor de personaje
     def _init_(self,esp,nom,alt):
-     self.especie= esp
-     self.nombre= nom
-     self.altura= alt
+        self.especie= esp
+        self.nombre= nom
+        self.altura= alt
+
     #metodos del personaje
     def correr(self,status):
         if(status):
