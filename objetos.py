@@ -37,3 +37,5 @@ print("Tiene una altura de: " + str(villano.altura))
 villano.correr(True)
 villano.lanzarGranadas()
 villano.recargarArma(recargarV)
+
+
