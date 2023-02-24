@@ -18,6 +18,8 @@ class Personaje:
         cargador= 10
         cargador= cargador + municiones
         print("el arma tiene " + str (cargador)+" balas")
+    def __pensar (self):
+         print("Toy pensando ............................")
 
 #Declarar Getters & Letters de atributos
     def getNombre(self):
