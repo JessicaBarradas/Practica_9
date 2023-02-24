@@ -20,6 +20,8 @@ heroe=Personaje(especieH,nombreH,alturaH)
 villano=Personaje(especieV,nombreV,alturaV)
 
 #3. Usar atributos
+
+heroe.setNombre("Pepe pecas ")
 print("")
 print("####### Objeto Heroe ####")
 print("El personaje se llama: " + heroe.getNombre() )
