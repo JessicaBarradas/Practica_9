@@ -9,3 +9,4 @@ class contra():
         return self.__digitos
     def puntuacion(self):
         return self.__puntuacion
+    
