@@ -1,6 +1,13 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter as tk
+from ControladorBD import *
+
+#Creamos un objeto de tipo controlador
+controlador = controladorBD()
+#Procedemos a guardar usuarios usando el metodo GuardarUsuarios() del objeto controlador
+def ejecutaInsert():
+    controlador.GuardarUsuario(varNom.get(),varCor.get(),varCon.get())
 
 ventana=Tk()
 ventana.title("CRUD Usuarios")
@@ -29,7 +36,7 @@ varCon=tk.StringVar()
 lblCon=Label(pestana1,text="Contraseña: ").pack()
 txtCon=Entry(pestana1,textvariable=varCon).pack()
 #Boton
-btnGuardar=Button(pestana1,text="Guardar Usuario").pack()
+btnGuardar=Button(pestana1,text="Guardar Usuario",command=ejecutaInsert).pack()
 
 panel.add(pestana1,text="Formulario de Usuarios")
 panel.add(pestana2,text="Buscar Usuario")
