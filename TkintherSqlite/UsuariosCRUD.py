@@ -15,7 +15,7 @@ def ejecutaSelectU():
     for usu in rsUsuario:
         cadena=str(usu[0])+" "+usu[1]+" "+usu[2]+" "+str(usu[3])
     if(rsUsuario):
-        print(cadena)
+        textBus.insert("0.0",cadena)
     else:
         messagebox.showinfo("No encontrado", "Usuario no registrado en la BD")
 
@@ -58,7 +58,8 @@ lblid=Label(pestana2,text="Identificador de Usuario: ").pack()
 txtid=Entry(pestana2,textvariable=varBus).pack()
 btnBusqueda=Button(pestana2,text="Buscar",command=ejecutaSelectU).pack()
 subBus=Label(pestana2,text="Registrado: ",fg="blue",font=("Modern",15)).pack()
-textBus=tk.Text(pestana2,height=5,width=52).pack()
+textBus=tk.Text(pestana2,height=5,width=52)
+textBus.pack()
 
 panel.add(pestana1,text="Formulario de Usuarios")
 panel.add(pestana2,text="Buscar Usuario")
