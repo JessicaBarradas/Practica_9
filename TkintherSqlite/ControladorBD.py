@@ -55,4 +55,14 @@ class controladorBD:
                 return RSusuario
             except sqlite3.OperationalError:
                 print("Error consulta")
-    
+    def consultarUsu(self):
+        conx=self.conexionBD()
+        cursor=conx.cursor()
+        try:
+            sqlConsu="Select * from TBRegistrados"
+            cursor.execute(sqlConsu)
+            Consulta=cursor.fetchall()
+            conx.close()
+            return Consulta
+        except sqlite3.OperationalError:
+            messagebox.showwarning("Advertencia","No se encontro ningún usuario")

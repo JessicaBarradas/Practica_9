@@ -18,7 +18,12 @@ def ejecutaSelectU():
         textBus.insert("0.0",cadena)
     else:
         messagebox.showinfo("No encontrado", "Usuario no registrado en la BD")
-
+#Función para mostrar a todos los usuarios 
+def ejecutaConsultaUsu():
+    consulta=controlador.consultarUsu()
+    tabUsu.delete(*tabUsu.get_children())
+    for user in consulta:
+        tabUsu.insert("",tk.END,text="",values=user)
 
 
 
@@ -60,6 +65,22 @@ btnBusqueda=Button(pestana2,text="Buscar",command=ejecutaSelectU).pack()
 subBus=Label(pestana2,text="Registrado: ",fg="blue",font=("Modern",15)).pack()
 textBus=tk.Text(pestana2,height=5,width=52)
 textBus.pack()
+
+#Pestaña 3: Consultar usuario
+titulo3=Label(pestana3,text="Consultar Usuarios",fg="red",font=("Modern",18)).pack()
+btnConsulta=Button(pestana3,text="Consultar",command=ejecutaConsultaUsu).pack()
+#Tabla
+columns=("id","nombre","correo","contra")
+tabUsu=ttk.Treeview(pestana3,columns=columns,show="headings")
+tabUsu.column("id",anchor=tk.W,width=30)
+tabUsu.column("nombre",anchor=tk.W,width=150)
+tabUsu.column("correo",anchor=tk.W,width=150)
+tabUsu.column("contra",anchor=tk.W,width=150)
+tabUsu.heading("id",text="ID")
+tabUsu.heading("nombre",text="NOMBRE")
+tabUsu.heading("correo",text="CORREO")
+tabUsu.heading("contra",text="CONTRASEÑA")
+tabUsu.pack()
 
 panel.add(pestana1,text="Formulario de Usuarios")
 panel.add(pestana2,text="Buscar Usuario")
