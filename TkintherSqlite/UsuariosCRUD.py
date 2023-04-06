@@ -24,8 +24,29 @@ def ejecutaConsultaUsu():
     tabUsu.delete(*tabUsu.get_children())
     for user in consulta:
         tabUsu.insert("",tk.END,text="",values=user)
-
-
+#Funcion para actualizar los datos del usuario
+def ejecutaActualizar():
+    rsUsuario=controlador.consultaUsuario(variID.get())
+    if(rsUsuario):
+        controlador.actualizarUsu(variID.get(),variNom.get(),variCor.get(),variCon.get())
+    else:
+        messagebox.showerror("ERROR","No hay usuario registrado en la BD")
+def ejecutaBuscar():
+    rsUsuario=controlador.consultaUsuario(Varid.get())
+    textBus.delete("1.0","end")
+    for usu in rsUsuario:
+        cadena=str(usu[0])+" "+usu[1]+" "+usu[2]+" "+str(usu[3])
+    if(rsUsuario):
+        textBus.insert("0.0",cadena)
+    else:
+        messagebox.showerror("ERROR","No hay usuario registrado en la BD")
+def ejecutaEliminarU():
+    conf=messagebox.askyesno("ELIINAR USUARIO","¿Seguro que desea eliminar el usuario?")
+    if (conf==True):
+        try:
+            controlador.EliminarUsu(Varid.get())
+        except sqlite3.OperationalError:
+            messagebox.showerror("ERROR","Error en la consulta")
 
 ventana=Tk()
 ventana.title("CRUD Usuarios")
@@ -38,6 +59,7 @@ pestana1=ttk.Frame(panel)
 pestana2=ttk.Frame(panel)
 pestana3=ttk.Frame(panel)
 pestana4=ttk.Frame(panel)
+pestana5=ttk.Frame(panel)
 
 #Comienza la pestaña 1: Formulario de Usuarios
 titulo=Label(pestana1,text="Registro de Usuarios",fg="Blue",font=("Modern",18)).pack()
@@ -81,11 +103,37 @@ tabUsu.heading("nombre",text="NOMBRE")
 tabUsu.heading("correo",text="CORREO")
 tabUsu.heading("contra",text="CONTRASEÑA")
 tabUsu.pack()
+#Pestaña 4: Actualizar Usuario
+titulo4 = Label(pestana4, text = "Actualizar Usuario", fg = "#84A7E5", font = ("Modern", 18)).pack()
+variID = tk.StringVar()
+variNom = tk.StringVar()
+variCor = tk.StringVar()
+variCon = tk.StringVar()
+lablid = Label(pestana4, text = "ID de usuario: ").pack()
+textid = Entry(pestana4, textvariable = variID).pack()
+lablNom = Label(pestana4, text = "Escribe el nuevo nombre de Usuario: ").pack()
+textNom = Entry(pestana4, textvariable = variNom).pack()
+lablCor = Label(pestana4, text = "Escribe el nuevo correo electronico: ").pack()
+textCor = Entry(pestana4, textvariable = variCor).pack()
+lablCon = Label(pestana4, text = "Escribe la nueva contraseña: ").pack()
+textCon = Entry(pestana4, textvariable = variCon).pack()
+btnActualizar=Button(pestana4,text="Actualizar",command=ejecutaActualizar).pack()
+#Pestaña 5: Eliminar Usuario
+titulo5 = Label(pestana5, text = "Eliminar Usuario", fg = "#D73F3F", font = ("Modern", 18)).pack()
+Varid=tk.StringVar()
+lablid=Label(pestana5,text="ID del usuario: ").pack()
+textid=Entry(pestana5,textvariable=Varid).pack()
+btnBuscarUsu=Button(pestana5,text="Buscar",command=ejecutaBuscar).pack()
+subBus=Label(pestana5,text="Registrado: ",fg="#5DD73F",font=("Modern",15)).pack()
+textBus=tk.Text(pestana5,height=5,width=52)
+textBus.pack()
+btnEliminar=Button(pestana5,text="Eliminar",command=ejecutaEliminarU).pack()
 
 panel.add(pestana1,text="Formulario de Usuarios")
 panel.add(pestana2,text="Buscar Usuario")
 panel.add(pestana3,text="Consultar Usuarios")
 panel.add(pestana4,text="Actualizar Usuarios")
+panel.add(pestana5,text="Eliminar Usuario")
 
 
 ventana.mainloop()

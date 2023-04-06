@@ -66,3 +66,40 @@ class controladorBD:
             return Consulta
         except sqlite3.OperationalError:
             messagebox.showwarning("Advertencia","No se encontro ningún usuario")
+    def actualizarUsu(self,id,nomact,coract,conact):
+        conx=self.conexionBD()
+        if (id=="" or nomact=="" or coract=="" or conact==""):
+            messagebox.showwarning("Advertencia","Ningun campo puede estar vacio")
+            conx.close()
+        else:
+            try:
+                cursor=conx.cursor()
+                nomb=nomact
+                correo=coract
+                conH=self.encriptarCon(conact)
+                sqlActu="UPDATE TBRegistrados SET nombre=?, correo=?, contra=? WHERE id=?"
+                cursor.execute(sqlActu,[nomb,correo,conH,id])
+                usuActu=cursor.fetchall()
+                conx.commit()
+                conx.close()
+                messagebox.showinfo("ENHORABUENA","Datos actualizados correctamente")
+                return usuActu
+            except sqlite3.OperationalError:
+                messagebox.showerror("ERROR","Error en la consulta")
+    def EliminarUsu(self,ID):
+        conx=self.conexionBD()
+        if(ID==""):
+            messagebox.showwarning("CUIDADO","No puede estar ningun campo vacio")
+            conx.close()
+        else:
+            try:
+                cursor=conx.cursor()
+                sqlEliminar="DELETE FROM TBRegistrados WHERE id=?"
+                cursor.execute(sqlEliminar,[ID])
+                EliminarU=cursor.fetchall()
+                conx.commit()
+                conx.close()
+                messagebox.showinfo("ENHORABUENA","El usuario se ha eliminado correctamente")
+                return EliminarU
+            except sqlite3.OperationalError:
+                messagebox.showerror("ERROR","Error en la consulta")
