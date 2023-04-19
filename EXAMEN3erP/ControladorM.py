@@ -22,8 +22,8 @@ class controladorMat:
             conx.close()
         else:
             cursor = conx.cursor()
-            datos =(Mat,Cant)
-            qrInsert="insert into MatConstruccion(Material, Cantidad) values(?,?)"
+            datos =(Mat, Cant)
+            qrInsert="insert into MatConstruccion(Material,Cantidad) values(?,?)"
             cursor.execute(qrInsert,datos)
             conx.commit()
             conx.close()
