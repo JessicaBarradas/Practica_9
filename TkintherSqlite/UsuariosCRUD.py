@@ -33,11 +33,11 @@ def ejecutaActualizar():
         messagebox.showerror("ERROR","No hay usuario registrado en la BD")
 def ejecutaBuscar():
     rsUsuario=controlador.consultaUsuario(Varid.get())
-    textBus.delete("1.0","end")
+    textBus1.delete("1.0","end")
     for usu in rsUsuario:
-        cadena=str(usu[0])+" "+usu[1]+" "+usu[2]+" "+str(usu[3])
+        cadena1=str(usu[0])+" "+usu[1]+" "+usu[2]+" "+str(usu[3])
     if(rsUsuario):
-        textBus.insert("0.0",cadena)
+        textBus1.insert("0.0",cadena1)
     else:
         messagebox.showerror("ERROR","No hay usuario registrado en la BD")
 def ejecutaEliminarU():
@@ -124,9 +124,9 @@ Varid=tk.StringVar()
 lablid=Label(pestana5,text="ID del usuario: ").pack()
 textid=Entry(pestana5,textvariable=Varid).pack()
 btnBuscarUsu=Button(pestana5,text="Buscar",command=ejecutaBuscar).pack()
-subBus=Label(pestana5,text="Registrado: ",fg="#5DD73F",font=("Modern",15)).pack()
-textBus=tk.Text(pestana5,height=5,width=52)
-textBus.pack()
+subBus1=Label(pestana5,text="Registrado: ",fg="#5DD73F",font=("Modern",15)).pack()
+textBus1=tk.Text(pestana5,height=5,width=52)
+textBus1.pack()
 btnEliminar=Button(pestana5,text="Eliminar",command=ejecutaEliminarU).pack()
 
 panel.add(pestana1,text="Formulario de Usuarios")
