@@ -7,8 +7,17 @@ controlador = controladorMat()
 #Procedemos a insertar material usando el metodo InsertarM() del objeto controlador
 def ejecutaInsertM():
     controlador.InsertarM(varMat.get(),IntCant.get())
-
-
+def ejecutaActualizar():
+    rsMate=controlador.consultaMaterial(variID.get())
+    if(rsMate):
+        controlador.actualizarMat(variID.get(),variMat.get(),variCant.get())
+    else:
+        messagebox.showerror("ERROR","No hay usuario registrado en la BD")
+def ejecutaConsultaMateri():
+    consulta=controlador.consultarMat()
+    tabMat.delete(*tabMat.get_children())
+    for user in consulta:
+        tabMat.insert("",tk.END,text="",values=user)
 
 ventana=Tk()
 ventana.title("Ferreteria")
@@ -42,10 +51,10 @@ lablMat = Label(pestana2, text = "Escribe el nuevo nombre del Material: ").pack(
 textMat = Entry(pestana2, textvariable = variMat).pack()
 lablCant = Label(pestana2, text = "Escribe la nueva cantidad del Material: ").pack()
 textCant = Entry(pestana2, textvariable = variCant).pack()
-btnActualizar=Button(pestana2,text="Actualizar").pack()
+btnActualizar=Button(pestana2,text="Actualizar", command=ejecutaActualizar).pack()
 #Pestaña 3: Consultar todos
 titulo3=Label(pestana3,text="Consultar Materiales",fg="red",font=("Modern",18)).pack()
-btnConsulta=Button(pestana3,text="Consultar").pack()
+btnConsulta=Button(pestana3,text="Consultar", command=ejecutaConsultaMateri).pack()
 #Tabla
 columns=("IDMat","Material","Cantidad")
 tabMat=ttk.Treeview(pestana3,columns=columns,show="headings")
